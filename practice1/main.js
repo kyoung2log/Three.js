@@ -20,13 +20,26 @@ const boxHeight = 1;
 const boxDepth = 1;
 const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
 
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
 
 // 지오메트리랑 메트라얼로 메시를 만듬
 const cube = new THREE.Mesh(geometry, material);
 
 // 만들어진 메시를 씬에 넣는다.
 scene.add(cube);
+
+const color = 0xffffff;
+const intensity = 3;
+
+// 색상과 명도로 조명을 설정
+const light = new THREE.DirectionalLight(color, intensity);
+
+// 카메라의 위치 고려하여 조명의 위치 설정
+light.position.set(-1, 2, 4);
+
+// 씬에 조명 추가
+// 참고로 MeshBasicMaterial 는 광원에 반응하지 않는다.
+scene.add(light);
 
 document.body.appendChild(renderer.domElement);
 
